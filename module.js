@@ -1,4 +1,4 @@
-class ClockModule {
+class IpmClockModule {
     constructor(container, config) {
         this.container = container;
         this.config = config;
@@ -7,7 +7,7 @@ class ClockModule {
     }
 
     async init() {
-        const response = await fetch('/modules/clock/module.html');
+        const response = await fetch('/modules/ipm-clock/module.html');
         const html = await response.text();
         this.container.innerHTML = html;
 
@@ -190,4 +190,4 @@ class ClockModule {
     }
 }
 
-window.ClockModule = ClockModule;
+window.IpmClockModule = IpmClockModule;
