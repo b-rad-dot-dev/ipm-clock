@@ -13,7 +13,7 @@ Displays current time with timezone support and customizable label.
 
 ```json
 {
-  "name": "clock",
+  "name": "ipm-clock",
   "width": 1,
   "height": 1,
   "x": 0,
@@ -69,7 +69,7 @@ Displays current time with timezone support and customizable label.
 
 ```json
 {
-  "name": "clock",
+  "name": "ipm-clock",
   "config": {
     "label": "Custom Format",
     "timezone": "America/Los_Angeles",
@@ -102,7 +102,7 @@ You can add the same module multiple times with different timezones:
 {
   "modules": [
     {
-      "name": "clock",
+      "name": "ipm-clock",
       "width": 1,
       "height": 1,
       "x": 0,
@@ -113,7 +113,7 @@ You can add the same module multiple times with different timezones:
       }
     },
     {
-      "name": "clock",
+      "name": "ipm-clock",
       "width": 1,
       "height": 1,
       "x": 1,
@@ -124,7 +124,7 @@ You can add the same module multiple times with different timezones:
       }
     },
     {
-      "name": "clock",
+      "name": "ipm-clock",
       "width": 1,
       "height": 1,
       "x": 2,
