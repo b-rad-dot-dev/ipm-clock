@@ -1,19 +1,28 @@
-class IpmClockModule {
+export default class IpmClockModule {
     constructor(container, config) {
-        this.container = container;
+        this.wrapper = container;
         this.config = config;
         this.updateInterval = null;
         this.init();
     }
 
     async init() {
-        const response = await fetch('/modules/ipm-clock/module.html');
-        const html = await response.text();
-        this.container.innerHTML = html;
+        this.shadow = this.wrapper.attachShadow({ mode: "open" });
 
-        this.labelElement = this.container.querySelector('.clock-label');
-        this.timeElement = this.container.querySelector('.clock-time');
-        this.dateElement = this.container.querySelector('.clock-date');
+        // Load CSS file
+        const cssText = await fetch(new URL("./styles.css", import.meta.url))
+            .then(res => res.text());
+        const sheet = new CSSStyleSheet();
+        sheet.replaceSync(cssText);
+        this.shadow.adoptedStyleSheets = [sheet];
+
+        // Load HTML
+        const html = await fetch(new URL("./module.html", import.meta.url))
+        this.shadow.innerHTML = await html.text();
+
+        this.labelElement = this.shadow.querySelector('.clock-label');
+        this.timeElement = this.shadow.querySelector('.clock-time');
+        this.dateElement = this.shadow.querySelector('.clock-date');
 
         // Set label
         this.labelElement.textContent = this.config.label || 'Clock';
@@ -189,5 +198,3 @@ class IpmClockModule {
         }
     }
 }
-
-window.IpmClockModule = IpmClockModule;
