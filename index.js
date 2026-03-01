@@ -7,22 +7,20 @@ export default class IpmClockModule {
     }
 
     async init() {
-        this.shadow = this.wrapper.attachShadow({ mode: "open" });
-
         // Load CSS file
         const cssText = await fetch(new URL("./styles.css", import.meta.url))
             .then(res => res.text());
         const sheet = new CSSStyleSheet();
         sheet.replaceSync(cssText);
-        this.shadow.adoptedStyleSheets = [sheet];
+        this.wrapper.adoptedStyleSheets.push(sheet);
 
         // Load HTML
         const html = await fetch(new URL("./module.html", import.meta.url))
-        this.shadow.innerHTML = await html.text();
+        this.wrapper.innerHTML = await html.text();
 
-        this.labelElement = this.shadow.querySelector('.clock-label');
-        this.timeElement = this.shadow.querySelector('.clock-time');
-        this.dateElement = this.shadow.querySelector('.clock-date');
+        this.labelElement = this.wrapper.querySelector('.clock-label');
+        this.timeElement = this.wrapper.querySelector('.clock-time');
+        this.dateElement = this.wrapper.querySelector('.clock-date');
 
         // Set label
         this.labelElement.textContent = this.config.label || 'Clock';
